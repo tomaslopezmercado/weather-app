@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import CardPrincipal from './componentes/CardPrincipal';
 
+
 const api_key = 'd5d873cb391a110855a518b631c09879';
 
-
+//Funcion para generar fecha
 const dateBuilder = (d) => {
     let months = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre",];
     let days = ["Domingo","Lunes","Martes","Miercoles","Jueves","Viernes","Sábado",];
@@ -16,11 +17,13 @@ const dateBuilder = (d) => {
     return `${day} ${date}` + " de " + `${month}` + ", " + `${year}`;
 }; 
 
+//Funcion para convertir los m/s a km/h (para medir la velocidad del viento)
 const conversorUnidades = (valor) =>{
     let resultado = (valor/1000)*3600
     return resultado.toFixed(2);
 }
 
+//Funcion que recibe la condicion principal del tiempo y devuelve el nombre del icono a ser llamado luego
 const getIcono = (valor) =>{
   
   let icono;
@@ -52,6 +55,7 @@ const getIcono = (valor) =>{
   return icono;
 }
 
+//Funcion para traducir las condiciones del clima recibidas por la api (ingles) a español
 const traduccion = (condition) => {
   let condicion;
   switch (condition) {
@@ -222,7 +226,6 @@ const traduccion = (condition) => {
 };
 
 
-
 export default class App extends Component {
     
     constructor(){
@@ -245,7 +248,7 @@ export default class App extends Component {
 
     getWeather = async () => {
         const api_call = await fetch (
-            `http://api.openweathermap.org/data/2.5/weather?lat=-34.599722&lon=-58.381944&appid=${api_key}`
+            `https://api.openweathermap.org/data/2.5/weather?lat=-34.599722&lon=-58.381944&appid=${api_key}`
         );
 
         const response = await api_call.json();
